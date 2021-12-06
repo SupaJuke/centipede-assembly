@@ -27,12 +27,12 @@
 
 .data
 	displayAddress: .word 0x10008000
-	bugLoc: .word 975
-	centiLoc: .word 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 # 0 = tail; 9 = head
-	centiDir: .word 1:10 	# 1 = right; -1 = left
-	dartsLoc: .word -1:32 	# -1 = not existing
-	fleaLoc: .word -1:32	# -1 = not existing
-	hitCounter: .word 0		# 3 = game end
+	bugLoc: 		.word 975
+	centiLoc: 		.word 9, 8, 7, 6, 5, 4, 3, 2, 1, 0 # 0 = tail; 9 = head
+	centiDir: 		.word 1:10 	#  1 = right; -1 = left
+	dartsLoc: 		.word -1:32 # -1 = not existing
+	fleaLoc: 		.word -1:32	# -1 = not existing
+	hitCounter: 	.word 0		#  3 = game end
 	
 	alphaColon: .word 0, 0, 0, 1, 0, 0, 0, 0, 0, 1, 0, 0, 0, 0, 0
 	alphaA: 	.word 1, 1, 1, 1, 0, 1, 1, 1, 1, 1, 0, 1, 1, 0, 1
@@ -395,7 +395,7 @@ arr_loop:
 	div $t6, $t1, 32			# $t6 = $t1 mod 32: 0 = colliding right;
 	mfhi $t6 					# 31 = colliding left
 		
-	beq $t2, 1, r_border_col		# check for right border collision
+	beq $t2, 1, r_border_col	# check for right border collision
 	beq $t2, -1, l_border_col	# check for left border collision
 	
 arr_loop_cont:
@@ -505,7 +505,7 @@ flea_col_mush:
 	bgt $t1, 992, flea_check_col # check hit border
 	
 	# TODO: implement player_col (if you want to implement lives and stuffs)
-	lw $t5, 0($t4)				# $t5 = color at $t4
+	lw $t5, 0($t4)					# $t5 = color at $t4
 	beq $t5, 0xffffff, player_col	# check hit player
 	
 	sw $t1, 0($t0)		# update flea location
